@@ -26,7 +26,7 @@ increment_drift2 = traces.astype(float)
 increment_drift3 = traces.astype(float)
 row_indices = np.arange(10000)
 
-# Apply the gradual drift according to Y [t] = a.X[t] + c.(r + N (μ, σ))
+# Apply Incremental drift according to Y [t] = a.X[t] + c.(r + N (μ, σ))
 for row in range(start_row, end_row):
     drift = 0.01 * ((row - start_row)/20 + np.round(np.random.normal(0, 1)) ) # Adjust the drift magnitude based on the row
     increment_drift[row, :] += drift
@@ -43,13 +43,13 @@ increment_drift[end_row:, :] += drift
 increment_drift2[end_row:, :] += drift2
 increment_drift3[end_row:, :] += drift3
 
-# Calculating the mean per each column
+
 traces_avg_values = np.mean(traces, axis=1)
 increment_drift_avg_values = np.mean(increment_drift, axis=1)
 increment_drift2_avg_values = np.mean(increment_drift2, axis=1)
 increment_drift3_avg_values = np.mean(increment_drift3, axis=1)
 
-# Plotting all the cases defined
+
 plt.plot(row_indices, increment_drift_avg_values, color='limegreen', label='Case 1: y=x+0.01[r1+N(0,1)]')
 plt.plot(row_indices, increment_drift2_avg_values, color='gold', label='Case 2: y=x+0.01[r2+N(0,1)]')
 plt.plot(row_indices, increment_drift3_avg_values, color='orange', label='Case 3: y=x+0.02[r2+N(1,1)]')

@@ -45,7 +45,7 @@ for i in range(num_intervals3):
 
 intervals3.sort(key=lambda x: x[0])
 
-# Apply the sudden drift according to P [Y [t] = a.X[t] + c.(i + N (μ, σ))]
+# Apply the gradual drift according to P [Y [t] = a.X[t] + c.(i + N (μ, σ))]
 for i in range(num_intervals):
     b = intervals[i][1]
     a = intervals[i][0]
